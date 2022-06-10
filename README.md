@@ -2,7 +2,8 @@
 
 ## Resources / References
 - https://elliotchance.medium.com/goroutines-and-channels-a-real-ly-simple-server-in-go-93ba49ff7c5c
--  https://pkg.go.dev/net
+- https://pkg.go.dev/net
+- https://www.linode.com/docs/guides/developing-udp-and-tcp-clients-and-servers-in-go/
 - https://freshman.tech/snippets/go/read-console-input/
 - https://tutorialedge.net/golang/parsing-json-with-golang/
 

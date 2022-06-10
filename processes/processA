@@ -1,0 +1,21 @@
+// client
+
+package processes
+
+import (
+	"../mp0/messages"
+	"fmt"
+	"net"
+	"os"
+)
+
+func SendMessage(m chan Message, address string) {
+	//Connect to port
+	c, err := net.Dial("tcp", address)
+	if err != nil {
+		panic(err)
+	}
+
+	// Send Message
+	fmt.Println("Sending a message...")
+}

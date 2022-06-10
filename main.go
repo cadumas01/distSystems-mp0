@@ -2,8 +2,7 @@ package main
 
 import (
 	"fmt"
-
-	"github.com/cadumas01/distSystems-mp0/messages"
+	"mp0/processes"
 )
 
 func usage() {
@@ -11,7 +10,9 @@ func usage() {
 }
 
 func main() {
-	m := messages.FromJson("message1.json")
-	fmt.Println(m.Content, "3")
+	const address = "8080"
+	//m := messages.FromJson("message1.json")
+
+	processes.StartServer(address)
 
 }
