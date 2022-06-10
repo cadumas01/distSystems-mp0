@@ -1,6 +1,6 @@
-// server
-
 package processes
+
+// server
 
 import (
 	"../mp0/messages"

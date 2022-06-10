@@ -1,6 +1,6 @@
-// client
-
 package processes
+
+//client
 
 import (
 	"../mp0/messages"

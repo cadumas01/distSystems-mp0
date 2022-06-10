@@ -2,7 +2,8 @@ package main
 
 import (
 	"fmt"
-	"mp0/processes"
+
+	"./mp0/processes"
 )
 
 func usage() {
