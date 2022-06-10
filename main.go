@@ -2,7 +2,8 @@ package main
 
 import (
 	"fmt"
-	"test/mp0/messages"
+
+	"github.com/cadumas01/distSystems-mp0/messages"
 )
 
 func usage() {

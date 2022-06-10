@@ -31,5 +31,7 @@ func FromJson(path string) *Message {
 
 	jsonFile.Close()
 
+	fmt.Println("test message")
+
 	return m
 }
