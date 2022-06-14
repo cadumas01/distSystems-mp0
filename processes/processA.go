@@ -15,8 +15,6 @@ func SendMessage(address string) {
 	conn, err := net.Dial("tcp", address)
 
 	if err != nil {
-
-		fmt.Println("SendMessage error")
 		SendMessage(address)
 		panic(err)
 	}
