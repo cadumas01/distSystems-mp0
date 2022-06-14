@@ -8,10 +8,8 @@ import (
 	"fmt"
 	"mp0/messages"
 	"net"
-	"strings"
 )
 
-// argument:
 func SendMessage(address string) {
 	//Connect to port
 	conn, err := net.Dial("tcp", address)
@@ -23,25 +21,22 @@ func SendMessage(address string) {
 		panic(err)
 	}
 
-	fmt.Println("Successfully connected")
+	fmt.Println("Client Successfully connected from " + conn.LocalAddr().String())
 
-	// load message and send it on channel
-	m := messages.FromJson("message1.json")
-
-	//conn.Write([]byte("this is a client message"))
-	//conn.Write([]byte(m.String()))
+	// Dealing with Message construction
+	m := messages.ConstructMessage()
 
 	// Send Message
 	fmt.Println("Sending a message...")
 
+	// Write Message over tcp channel
 	_, err = conn.Write([]byte(m.String()))
 
-	// 	fmt.Println("Just wrote n = " + strconv.Itoa(n))
 	if err != nil {
 		panic("Error writing message")
 	}
 
-	// fmt.Println("About to wait for ACK")
+	// Wait for confirmation
 	waitForACK(conn)
 }
 
@@ -50,13 +45,11 @@ func waitForACK(conn net.Conn) {
 	buf := make([]byte, 64)
 
 	// fmt.Println("Inside waitForACK")
-	for s := ""; s != "MESSAGE RECEIVED"; {
+	for s := ""; s != Confirmation; {
 		s = read(conn, buf)
-		//	fmt.Println("s = " + s)
-		// fmt.Println(strconv.Itoa(len(s)) + " | " + strconv.Itoa(len("MESSAGE RECEIVED")))
 	}
 
-	fmt.Println("Broke out of loop, message receieved")
+	fmt.Println("Confirmation received, client exiting...")
 
 }
 
@@ -67,14 +60,8 @@ func read(conn net.Conn, buf []byte) string {
 		fmt.Println("Error reading")
 	}
 
-	// fmt.Println("Just read n = " + strconv.Itoa(n))
-
-	// trim unused bytes in buffer
-	buf = bytes.Trim(buf, "\x00")
-	// fmt.Println(buf)
-	s := strings.TrimSpace(string(buf))
-	// fmt.Println(s)
+	// trim unused bytes in buffer and convert to string
+	s := string(bytes.Trim(buf, "\x00"))
 
 	return s
-
 }

@@ -10,6 +10,8 @@ import (
 
 var bufSize = 2048
 
+const Confirmation = "ACK"
+
 // Starts listener are returns listener variable
 func StartServer(address string) (ln net.Listener) {
 	ln, err := net.Listen("tcp", address)
@@ -34,23 +36,12 @@ func AcceptClient(ln net.Listener) {
 		}
 
 		go handleConnection(conn)
-
-		//		defer ln.Close()
 	}
 }
 
 func handleConnection(conn net.Conn) {
-
-	fmt.Println("Client connected from " + conn.RemoteAddr().String())
-	//	defer ln.Close()
-
 	buf := make([]byte, bufSize)
-
-	// fmt.Println("before the loop")
-
-	// fmt.Println("top of loop")
 	_, err := bufio.NewReader(conn).Read(buf)
-	//fmt.Println("n  =" + strconv.Itoa(n))
 
 	if err != nil {
 		panic(err)
@@ -60,12 +51,6 @@ func handleConnection(conn net.Conn) {
 	fmt.Print("\nServer recieved the Message: \n" + message)
 
 	// Send confiramtion message
-	conn.Write([]byte("MESSAGE RECEIVED"))
-
-	//conn.Write([]byte("Just read a message:" + message))
-
-	//conn.Write([]byte("this is a server message"))
-
-	//fmt.Println("Post error check")
-
+	conn.Write([]byte(Confirmation))
+	fmt.Println("Confirmation sent, server exiting...")
 }
