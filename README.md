@@ -6,8 +6,8 @@ A simple tcp server-client message program
 Run: ``go run main.go``
 
 ## Overview
-- processA is the client
-- processB is the server
+processA is the client
+processB is the server
 
 1. TCP server is initalized, a net.Listener is returned
 2. A goroutine is started for the server to accept client connections to that net.Listener
