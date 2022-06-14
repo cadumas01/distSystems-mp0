@@ -1,3 +1,3 @@
-module github.com/cadumas01/mp0
+module mp0
 
 go 1.18

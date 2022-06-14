@@ -26,7 +26,6 @@ type Message struct {
 
 func newMessage(mS messageString) *Message {
 	const longForm = "January 2, 2006 3:04pm (MST)"
-	fmt.Println(mS.Date)
 	date, err := time.Parse(longForm, mS.Date)
 
 	if err != nil {
@@ -51,7 +50,10 @@ func FromJson(path string) *Message {
 
 	jsonFile.Close()
 
-	fmt.Println("test message")
-
 	return newMessage(mS)
+}
+
+func (m Message) String() string {
+	return fmt.Sprintf("\nTo: %s\nFrom: %s\nDate: %s\nTitle: %s\nContent: %s\n\n",
+		m.To, m.From, m.Date.String(), m.Title, m.Content)
 }

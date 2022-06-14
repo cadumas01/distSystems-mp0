@@ -2,8 +2,7 @@ package main
 
 import (
 	"fmt"
-
-	"./mp0/processes"
+	"mp0/processes"
 )
 
 func usage() {
@@ -11,9 +10,19 @@ func usage() {
 }
 
 func main() {
-	const address = "8080"
-	//m := messages.FromJson("message1.json")
+	// fmt.Println("line 13")
+	const address = ":8080"
 
-	processes.StartServer(address)
+	//channel := make(chan messages.Message)
 
+	ln := processes.StartServer(address)
+
+	go processes.AcceptClient(ln)
+
+	// fmt.Println("line 21")
+	// load message into channel and send it
+	//channel <- *m
+	processes.SendMessage("localhost" + address)
+
+	// fmt.Println("Line 27")
 }
