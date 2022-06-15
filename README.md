@@ -3,20 +3,20 @@ A simple tcp server-client message program
 
 ## Usage
 
-Run: ``go run main.go``
+1. Run: ``go run main.go -B`` to start the server
+2. Open a second shell, run ``go run main.go -A`` to start the client. Interact with the client's prompts to send a message to the server.
 
 ## Overview
 processA is the client
 
 processB is the server
 
-1. TCP server is initalized, a net.Listener is returned
-2. A goroutine is started for the server to accept client connections to that net.Listener
-3. The client connects to the listener 
-4. The server accepts the client
-5. The client sends a message (via CLI or json file)
-6. The server recieves the message, sends confirmation and exits
-7. The client recieves confirmation and exits
+1. Server is started and initializes a tcp listener
+2. The client connects to the listener 
+3. The server accepts the client
+4. The client sends a message (via CLI or json file)
+5. The server recieves the message, sends confirmation and exits
+6. The client recieves confirmation and exits
 
 ## Resources / References
 - https://pkg.go.dev/net

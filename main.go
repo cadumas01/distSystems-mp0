@@ -1,22 +1,33 @@
 package main
 
 import (
+	"fmt"
 	"mp0/processes"
-	"sync"
+	"os"
+	"strconv"
 )
+
+func usage() {
+	fmt.Println("For client run: go run main.go -A\nFor server run: go run main.go -B")
+}
 
 func main() {
 	const address = ":8080"
 
-	wg := new(sync.WaitGroup)
+	fmt.Println(os.Args[1])
 
-	wg.Add(2) // add 2 for the two goroutines
+	args := os.Args
 
-	ln := processes.StartServer(address)
+	fmt.Println(strconv.Itoa(len(args)))
 
-	go processes.AcceptClient(ln, wg)
+	if len(args) != 2 {
+		usage()
+	} else if args[1] == "-B" {
+		processes.StartServer(address)
+	} else if args[1] == "-A" {
+		processes.SendMessage("localhost" + address)
+	} else {
+		usage()
+	}
 
-	go processes.SendMessage("localhost"+address, wg)
-
-	wg.Wait()
 }

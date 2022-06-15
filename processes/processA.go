@@ -8,21 +8,18 @@ import (
 	"fmt"
 	"mp0/messages"
 	"net"
-	"sync"
 )
 
-func SendMessage(address string, wg *sync.WaitGroup) {
+func SendMessage(address string) {
 	//Connect to port
 	conn, err := net.Dial("tcp", address)
 
 	if err != nil {
-		SendMessage(address, wg)
+		SendMessage(address)
 		panic(err)
 	}
 
 	fmt.Println("Client Successfully connected from " + conn.LocalAddr().String())
-
-	defer wg.Done()
 
 	// Dealing with Message construction
 	m := messages.ConstructMessage()
